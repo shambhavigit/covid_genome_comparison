@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>R Notebook</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Experiments</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Notebook_Final.html">Covid Sequence</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Notebook</h1>
+
+</div>
+
+
+<p>Comparison of whole genome sequences provides a highly detailed view of how organisms are related to each other at the genetic level. I have considered a few criteria to compare the composition of the selected coronaviruses.</p>
+<p>Oligonucleotide composition</p>
+<p>GC content</p>
+<p>Oligonucleotide composition</p>
+<p>An oligonucleotide is a contiguous string of a small number of nucleotides. In computational terms, we define oligonucleotides as k-mers (words of size k). In this comparison, I have considered 3-mers (also known as trimers of trinucleotides) and their composition (trinucleotide composition). There are 32 (4³/2) distinct 3-mers. We obtain the normalised frequencies of each distinct trinucleotide by counting the number of occurrences of that trinucleotide and dividing by the total number of trinucleotides. We normalise these counts to avoid any unevenness caused due to different lengths of sequences.</p>
+<p>Normalized frequency of kᵢ = Number of occurrences of kᵢ / total number of k-mers (where kᵢ is the iᵗʰ k-mer)</p>
+<p>The oligonucleotide composition is conserved within microbial species and varies between species</p>
+<p>GC content</p>
+<p>GC content (or guanine-cytosine content) is the percentage of nucleotides in a sequence that are either guanine or cytosine.</p>
+<p>GC content = (G + C) / (A + G + C + T) * 100</p>
+<p>The GC content is also believed to vary between different species</p>
+<p>Initialize the trimers and tetramers</p>
+<pre class="r"><code>trimers &lt;- c(&quot;AAA&quot;, &quot;AAC&quot;, &quot;AAG&quot;, &quot;AAT&quot;, &quot;ACA&quot;, &quot;ACC&quot;, &quot;ACG&quot;, &quot;ACT&quot;, &quot;AGA&quot;, &quot;AGC&quot;, &quot;AGG&quot;, &quot;ATA&quot;, &quot;ATC&quot;, &quot;ATG&quot;, &quot;CAA&quot;, &quot;CAC&quot;, &quot;CAG&quot;, &quot;CCA&quot;,&quot;CCC&quot;,&quot;CCG&quot;,&quot;CGA&quot;,&quot;CGC&quot;,&quot;CTA&quot;,&quot;CTC&quot;,&quot;GAA&quot;,&quot;GAC&quot;,&quot;GCA&quot;,&quot;GCC&quot;,&quot;GGA&quot;,&quot;GTA&quot;,&quot;TAA&quot;,&quot;TCA&quot;)
+
+tetramers &lt;- c(&#39;AAAA&#39;,&#39;AAAC&#39;,&#39;AAAG&#39;,&#39;AAAT&#39;,&#39;AACA&#39;,&#39;AACC&#39;,&#39;AACG&#39;,&#39;AACT&#39;,&#39;AAGA&#39;,&#39;AAGC&#39;,&#39;AAGG&#39;,&#39;AAGT&#39;,&#39;AATA&#39;,&#39;AATC&#39;, &#39;AATG&#39;,&#39;AATT&#39;,&#39;ACAA&#39;,&#39;ACAC&#39;,&#39;ACAG&#39;,&#39;ACAT&#39;,&#39;ACCA&#39;,&#39;ACCC&#39;,&#39;ACCG&#39;,&#39;ACCT&#39;,&#39;ACGA&#39;,&#39;ACGC&#39;,&#39;ACGG&#39;,&#39;ACGT&#39;,
+&#39;ACTA&#39;,&#39;ACTC&#39;,&#39;ACTG&#39;,&#39;AGAA&#39;,&#39;AGAC&#39;,&#39;AGAG&#39;,&#39;AGAT&#39;,&#39;AGCA&#39;,&#39;AGCC&#39;,&#39;AGCG&#39;,&#39;AGCT&#39;,&#39;AGGA&#39;,&#39;AGGC&#39;,&#39;AGGG&#39;,
+&#39;AGTA&#39;,&#39;AGTC&#39;,&#39;AGTG&#39;,&#39;ATAA&#39;,&#39;ATAC&#39;,&#39;ATAG&#39;,&#39;ATAT&#39;,&#39;ATCA&#39;,&#39;ATCC&#39;,&#39;ATCG&#39;,&#39;ATGA&#39;,&#39;ATGC&#39;,&#39;ATGG&#39;,&#39;ATTA&#39;,
+&#39;ATTC&#39;,&#39;ATTG&#39;,&#39;CAAA&#39;,&#39;CAAC&#39;,&#39;CAAG&#39;,&#39;CACA&#39;,&#39;CACC&#39;,&#39;CACG&#39;,&#39;CAGA&#39;,&#39;CAGC&#39;,&#39;CAGG&#39;,&#39;CATA&#39;,&#39;CATC&#39;,&#39;CATG&#39;,
+&#39;CCAA&#39;,&#39;CCAC&#39;,&#39;CCAG&#39;,&#39;CCCA&#39;,&#39;CCCC&#39;,&#39;CCCG&#39;,&#39;CCGA&#39;,&#39;CCGC&#39;,&#39;CCGG&#39;,&#39;CCTA&#39;,&#39;CCTC&#39;,&#39;CGAA&#39;,&#39;CGAC&#39;,&#39;CGAG&#39;,&#39;CGCA&#39;,&#39;CGCC&#39;,&#39;CGCG&#39;,&#39;CGGA&#39;,&#39;CGGC&#39;,&#39;CGTA&#39;,&#39;CGTC&#39;,&#39;CTAA&#39;,&#39;CTAC&#39;,&#39;CTAG&#39;,&#39;CTCA&#39;,&#39;CTCC&#39;,&#39;CTGA&#39;,&#39;CTGC&#39;,&#39;CTTA&#39;,&#39;CTTC&#39;,&#39;GAAA&#39;,&#39;GAAC&#39;,&#39;GACA&#39;,&#39;GACC&#39;,&#39;GAGA&#39;,&#39;GAGC&#39;,&#39;GATA&#39;,&#39;GATC&#39;,&#39;GCAA&#39;,&#39;GCAC&#39;,&#39;GCCA&#39;,&#39;GCCC&#39;,&#39;GCGA&#39;,&#39;GCGC&#39;,&#39;GCTA&#39;,&#39;GGAA&#39;,&#39;GGAC&#39;,&#39;GGCA&#39;,&#39;GGCC&#39;,&#39;GGGA&#39;,&#39;GGTA&#39;,&#39;GTAA&#39;,&#39;GTAC&#39;,&#39;GTCA&#39;,&#39;GTGA&#39;,&#39;GTTA&#39;,&#39;TAAA&#39;,&#39;TACA&#39;,&#39;TAGA&#39;,&#39;TATA&#39;,&#39;TCAA&#39;,&#39;TCCA&#39;,&#39;TCGA&#39;,&#39;TGAA&#39;,&#39;TGCA&#39;,&#39;TTAA&#39;)</code></pre>
+<p>Define an oligo counter function</p>
+<pre class="r"><code>oligo_counter &lt;- function(gs_vector,oligo_collection,oligo_len){
+    i &lt;- oligo_len
+    j &lt;- 0
+      counter &lt;- c()
+    len_gs_vector &lt;- length(gs_vector)
+    for (i in i:len_gs_vector)
+        {     j &lt;- 0
+            temp_extract &lt;- c()
+            for ( j in 1:oligo_len-1) 
+                {     
+                    temp_extract &lt;- c(temp_extract,gs_vector[c(i-j)])
+                    #print(temp_extract)
+                }               
+
+            curr_seq &lt;- paste(temp_extract ,collapse=&#39;&#39;)
+            #print(curr_seq)
+            k &lt;- 1   
+            # Merge cs into single string   
+            for (k in k:length(oligo_collection))
+              {
+                    if (curr_seq == oligo_collection[k])
+                    {
+                     counter &lt;- c(counter, oligo_collection[k])
+                }
+                  } 
+        }
+
+    a &lt;- table(counter) 
+    Seq &lt;- as.data.frame(a)
+    
+}</code></pre>
+<p>Read and vectorize sequences one by one</p>
+<pre class="r"><code>library(seqinr)
+covid &lt;- read.fasta(&quot;datasets_fasta/cov2.fasta&quot;,forceDNAtolower = FALSE)
+SARS &lt;-  read.fasta(&quot;datasets_fasta/sars.fasta&quot;,forceDNAtolower = FALSE)
+Mers &lt;-  read.fasta(&quot;datasets_fasta/mers.fasta&quot;,forceDNAtolower = FALSE)
+Bat_sars &lt;-  read.fasta(&quot;datasets_fasta/BAT_SARS.fasta&quot;,forceDNAtolower = FALSE)
+Bat_RaTG13 &lt;- read.fasta(&quot;datasets_fasta/bat_RaTG13.txt&quot;,forceDNAtolower = FALSE)
+hiv &lt;- read.fasta(&quot;datasets_fasta/hiv2.fasta&quot;,forceDNAtolower = FALSE)
+malaria &lt;- read.fasta(&quot;datasets_fasta/malariae.fasta&quot;,forceDNAtolower = FALSE)
+Pangolin &lt;- read.fasta(&quot;datasets_fasta/pangolin.txt&quot;,forceDNAtolower = FALSE)
+Bat_SL_CoVZC45 &lt;- read.fasta(&quot;datasets_fasta/bat-SL-CoVZC45.txt&quot;,forceDNAtolower = FALSE)</code></pre>
+<p>Convert first sequence into vector</p>
+<pre class="r"><code>covid_seq &lt;- unlist(covid[[1]][1:length(covid[[1]])])
+sars_seq &lt;- unlist(SARS[[1]][1:length(SARS[[1]])])
+mers_seq &lt;- unlist(Mers[[1]][1:length(Mers[[1]])])
+bat_seq &lt;- unlist(Bat_sars[[1]][1:length(Bat_sars[[1]])])
+bat_ratg13_seq&lt;- unlist(Bat_RaTG13[[1]][1:length(Bat_RaTG13[[1]])])
+hiv_seq &lt;- unlist(hiv[[1]][1:length(hiv[[1]])])
+malaria_seq &lt;- unlist(malaria[[1]][1:length(malaria[[1]])])
+Pangolin_seq &lt;- unlist(Pangolin[[1]][1:length(Pangolin[[1]])])
+Bat_SL_CoVZC45_seq &lt;- unlist(Bat_SL_CoVZC45[[1]][1:length(Bat_SL_CoVZC45[[1]])])</code></pre>
+<p>Calculate trimer count of all</p>
+<pre class="r"><code>covid_tri &lt;- oligo_counter(covid_seq ,trimers,3)
+sars_tri &lt;- oligo_counter(sars_seq ,trimers,3)
+mers_tri &lt;- oligo_counter(mers_seq ,trimers,3)
+bat_tri &lt;- oligo_counter(bat_seq ,trimers,3)
+bat_rat_tri &lt;-oligo_counter(bat_ratg13_seq,trimers,3)
+hiv_tri &lt;- oligo_counter(hiv_seq ,trimers,3)
+malaria_tri &lt;- oligo_counter(malaria_seq ,trimers,3)
+pangolin_tri&lt;- oligo_counter(Pangolin_seq,trimers,3)
+Bat_CovZC45_tri &lt;- oligo_counter(Bat_SL_CoVZC45_seq,trimers,3)</code></pre>
+<p>Calculate tetramer count of all</p>
+<pre class="r"><code>covid_tetra &lt;- oligo_counter(covid_seq ,tetramers,4)
+sars_tetra &lt;- oligo_counter(sars_seq ,tetramers,4)
+mers_tetra &lt;- oligo_counter(mers_seq ,tetramers,4)
+bat_tetra &lt;- oligo_counter(bat_seq ,tetramers,4)
+bat_rat_tetra &lt;- oligo_counter(bat_ratg13_seq,tetramers,4)
+hiv_tetra &lt;- oligo_counter(hiv_seq ,tetramers,4)
+malaria_tetra &lt;- oligo_counter(malaria_seq ,tetramers,4)
+pangolin_tetra &lt;- oligo_counter(Bat_SL_CoVZC45_seq,tetramers,4)
+Bat_CovZC45_tetra &lt;- oligo_counter(Bat_SL_CoVZC45_seq,tetramers,4)</code></pre>
+<p>Merge tetramers Rename columns and normalize Normalised freqeuncy of k? = Number of occurrences of k? / total number of k-mers</p>
+<pre class="r"><code>tetramer_merge&lt;- cbind(covid_tetra,sars_tetra$Freq,mers_tetra$Freq,bat_tetra$Freq,bat_rat_tetra$Freq,hiv_tetra$Freq,malaria_tetra$Freq,pangolin_tetra$Freq,Bat_CovZC45_tetra$Freq)
+tetramer_merge[,-1] = apply(tetramer_merge[,-1],2,function(x){x/sum(x)})
+
+names(tetramer_merge)[1]&lt;- &quot;tetramers&quot;
+names(tetramer_merge)[2]&lt;- &quot;cov&quot;
+names(tetramer_merge)[3]&lt;- &quot;sars&quot;
+names(tetramer_merge)[4]&lt;- &quot;mers&quot;
+names(tetramer_merge)[5]&lt;- &quot;bat&quot;
+names(tetramer_merge)[6]&lt;- &quot;bat_ratg&quot;
+names(tetramer_merge)[7]&lt;- &quot;hiv&quot;
+names(tetramer_merge)[8]&lt;- &quot;mal&quot;
+names(tetramer_merge)[9]&lt;- &quot;pangolin&quot;
+names(tetramer_merge)[10]&lt;- &quot;Bat_CovZC45&quot;</code></pre>
+<p>only for 5 genomes</p>
+<pre class="r"><code>tetramer_merge_5&lt;- data.frame(tetramers=tetramers,cov=tetramer_merge$cov,sars=tetramer_merge$sars,bat_ratg=tetramer_merge$bat_ratg,pangolin=tetramer_merge$pangolin,Bat_CovZC45=tetramer_merge$Bat_CovZC45)</code></pre>
+<p>Merge Trimers Rename columns and normalize Normalised freqeuncy of k? = Number of occurrences of k? / total number of k-mers</p>
+<pre class="r"><code>trimers_merge &lt;- cbind(covid_tri,sars_tri$Freq,mers_tri$Freq,bat_tri$Freq,bat_rat_tri$Freq,hiv_tri$Freq,malaria_tri$Freq,pangolin_tri$Freq,Bat_CovZC45_tri$Freq)
+
+trimers_merge[,-1] = apply(trimers_merge[,-1],2,function(x){x/sum(x)})
+names(trimers_merge)[1]&lt;- &quot;trimers&quot;
+names(trimers_merge)[2]&lt;- &quot;cov&quot;
+names(trimers_merge)[3]&lt;- &quot;sars&quot;
+names(trimers_merge)[4]&lt;- &quot;mers&quot;
+names(trimers_merge)[5]&lt;- &quot;bat&quot;
+names(trimers_merge)[6]&lt;- &quot;bat_ratg&quot;
+names(trimers_merge)[7]&lt;- &quot;hiv&quot;
+names(trimers_merge)[8]&lt;- &quot;mal&quot;
+names(trimers_merge)[9]&lt;- &quot;pangolin&quot;
+names(trimers_merge)[10]&lt;- &quot;Bat_CovZC45&quot;</code></pre>
+<p>only for 5 genomes</p>
+<pre class="r"><code>trimer_merge_5 &lt;- data.frame(trimers=trimers,cov=trimers_merge$cov,sars=trimers_merge$sars,bat_ratg=trimers_merge$bat_rat,pangolin=trimers_merge$pangolin,Bat_CovZC45=trimers_merge$Bat_CovZC45)
+
+library(reshape2)
+plot&lt;- melt(trimers_merge,id.var = &quot;trimers&quot;)
+plot5 &lt;- melt(trimer_merge_5 ,id.var = &quot;trimers&quot;)
+plot_tetra &lt;- melt(tetramer_merge,id.var = &quot;tetramers&quot;)
+plot_tetra_5 &lt;- melt(tetramer_merge_5,id.var = &quot;tetramers&quot;)</code></pre>
+<p>Line plot for trimers using package ggplot2</p>
+<pre class="r"><code>library(ggplot2)
+trimer_line_plot &lt;- ggplot(plot, aes(x = trimers, y = value,group = variable, color = variable)) + 
+  geom_line()+ theme(axis.text.x = element_text(angle = 90))
+trimer_line_plot</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-11-1.png" width="1152" /> We can observe that COVID-19 and bat-RaTG13 show very similar trinucleotide composition patterns compared to SARS-CoV and Bat-CoV</p>
+<p>Lets plot for only 5 closely related genomes</p>
+<p>Plot the graphs for 5 genomes</p>
+<pre class="r"><code>trimer_line_plot5 &lt;- ggplot(plot5, aes(x = trimers, y = value,group = variable, color = variable)) + 
+  geom_line()+ theme(axis.text.x = element_text(angle = 90))
+trimer_line_plot5</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-12-1.png" width="960" /> Line plot for trimers</p>
+<pre class="r"><code>tetra_line_plot &lt;- ggplot(plot_tetra, aes(x = tetramers, y = value,group = variable, color = variable)) + 
+  geom_line()+ theme(axis.text.x = element_text(angle = 90))
+tetra_line_plot</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-13-1.png" width="1152" /> The tetranucleotide (4-mer or tetramer) composition patterns of the different coronavirus genomes. Similar trends to that of 3-mers can be seen</p>
+<p>Lets plot only for 5 genomes Plot the graphs for 5 genomes</p>
+<pre class="r"><code>tetra_line_plot5 &lt;- ggplot(plot_tetra_5, aes(x = tetramers, y = value,group = variable, color = variable)) + 
+  geom_line()+ theme(axis.text.x = element_text(angle = 90))
+tetra_line_plot5</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-14-1.png" width="1152" /> GC content analysis</p>
+<pre class="r"><code>covid_GC &lt;- GC(covid_seq)
+covid_GC</code></pre>
+<pre><code>## [1] 0.3797278</code></pre>
+<pre class="r"><code>sars_GC &lt;- GC(sars_seq)
+sars_GC</code></pre>
+<pre><code>## [1] 0.4076166</code></pre>
+<pre class="r"><code>mers_GC &lt;- GC(mers_seq)
+mers_GC</code></pre>
+<pre><code>## [1] 0.4123643</code></pre>
+<pre class="r"><code>bat_GC &lt;- GC(bat_seq)
+bat_GC</code></pre>
+<pre><code>## [1] 0.4098107</code></pre>
+<pre class="r"><code>bat_ratg13_GC &lt;- GC(bat_ratg13_seq)
+bat_ratg13_GC</code></pre>
+<pre><code>## [1] 0.3803718</code></pre>
+<pre class="r"><code>hiv_GC &lt;- GC(hiv_seq)
+hiv_GC</code></pre>
+<pre><code>## [1] 0.4566078</code></pre>
+<pre class="r"><code>malaria_GC &lt;- GC(malaria_seq)
+malaria_GC</code></pre>
+<pre><code>## [1] 0.4766111</code></pre>
+<pre class="r"><code>pangolin_GC &lt;- GC(Pangolin_seq)
+pangolin_GC</code></pre>
+<pre><code>## [1] 0.3819315</code></pre>
+<pre class="r"><code>Bat_CovZC45_GC &lt;- GC(Bat_SL_CoVZC45_seq )
+Bat_CovZC45_GC</code></pre>
+<pre><code>## [1] 0.3890343</code></pre>
+<p>According to the GC content values listed above, we can say that COVID-19 and bat-RaTG13,pangolin_Cov and Bat_CoVZC45 have very similar GC content of~37–38%. Plot for GC content</p>
+<pre class="r"><code>GC_content &lt;- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)
+Names &lt;- c(&quot;cov&quot;,&quot;sars&quot;,&quot;Mers&quot;,&quot;Bat&quot;,&quot;Bat_ratg&quot;,&quot;hiv&quot;,&quot;malaria&quot;,&quot;pangolin&quot;,&quot;batCoVZC45&quot;)
+GC_df &lt;- data.frame(&quot;Names&quot;= Names,&quot;GC&quot;=GC_content)
+
+GC_df</code></pre>
+<pre><code>##        Names        GC
+## 1        cov 0.3797278
+## 2       sars 0.4076166
+## 3       Mers 0.4123643
+## 4        Bat 0.4098107
+## 5   Bat_ratg 0.3803718
+## 6        hiv 0.4566078
+## 7    malaria 0.4766111
+## 8   pangolin 0.3819315
+## 9 batCoVZC45 0.3890343</code></pre>
+<p>Plot a bar graph</p>
+<pre class="r"><code>plot_GC &lt;- melt(GC_df,id.var = &quot;Names&quot;)
+plot_GC &lt;- ggplot(GC_df, aes(x = Names, y = GC)) + 
+  geom_bar(stat = &quot;identity&quot;)+ theme(axis.text.x = element_text(angle = 90))
+plot_GC</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-17-1.png" width="1152" /></p>
+<p>Pairwise Sequence alignment First use a fixed substitution matrix The sequence alignment is a way of arranging the sequences of DNA/RNA or protein to identify regions of similarity that may be a consequence of functional, structural, or evolutionary relationships between the sequences.</p>
+<p>Let’s align other genomes which have proved to be similar with the Covid-19 genome.</p>
+<pre class="r"><code>covid_str &lt;- paste(covid_seq , collapse=&quot;&quot;)
+sars_str &lt;- paste(sars_seq , collapse=&quot;&quot;)
+ratg_str &lt;- paste(bat_ratg13_seq , collapse=&quot;&quot;)
+pangolin_str &lt;- paste(Pangolin_seq, collapse=&quot;&quot;)
+Bat_CoVZC45_str &lt;- paste(Bat_SL_CoVZC45_seq ,collapse=&quot;&quot;)
+
+library(Biostrings)
+corona_dnastring &lt;- DNAString(covid_str)
+sars_dnastring &lt;- DNAString(sars_str)
+bat_ratg_dnastring &lt;- DNAString(ratg_str)
+pangolin_dnastring &lt;- DNAString(pangolin_str)
+Bat_CoVZC45_dnastring &lt;- DNAString(Bat_CoVZC45_str)</code></pre>
+<p>Lets align the genomes using pairwise alignment The goal of pairwise sequence alignment is to establish a correspondence between the elements in a pair of sequences that share a common property, such as common ancestry or a common structural or functional role. Global alignment is used in cases where we have reason to believe that the sequences are related along their entire length Alignments can be scored with similarity measures. A higher score indicates a better alignment</p>
+<pre class="r"><code>mat &lt;- nucleotideSubstitutionMatrix(match = 1, mismatch = -1, baseOnly = TRUE)
+
+corona_sars &lt;-
+    pairwiseAlignment(corona_dnastring,sars_dnastring, substitutionMatrix = mat,
+                      gapOpening = 5, gapExtension = 2)
+corona_sars</code></pre>
+<pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: ATTAAAGGTTTATACCTTCCCAGGTAACAAACCA...CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+## subject: ATATTAGGTTTTTACCTACCCAGGAAA--AGCCA...CAAAAAAAAAAAAAAAAAAAAAAAA---------
+## score: 16961</code></pre>
+<pre class="r"><code> corona_bat_ratg &lt;-
+    pairwiseAlignment(corona_dnastring,bat_ratg_dnastring, substitutionMatrix = mat,
+                      gapOpening = 5, gapExtension = 2)
+ corona_bat_ratg</code></pre>
+<pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: ATTAAAGGTTTATACCTTCCCAGGTAACAAACCA...CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+## subject: ---------------CTTTCCAGGTAACAAACCA...CAAAAAAAAAAAAAAAAAAAA-------------
+## score: 27442</code></pre>
+<pre class="r"><code>corona_pangolin &lt;-
+    pairwiseAlignment(corona_dnastring,pangolin_dnastring, substitutionMatrix = mat,
+                      gapOpening = 5, gapExtension = 2)
+corona_pangolin</code></pre>
+<pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: ATTAAAGGTTTATACCTTCCCAGGTAACAAACCA...CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+## subject: ----------------------------------...----------------------------------
+## score: 22912</code></pre>
+<pre class="r"><code>corona_bat_CoVZC45 &lt;-
+    pairwiseAlignment(corona_dnastring,Bat_CoVZC45_dnastring , substitutionMatrix = mat,
+                      gapOpening = 5, gapExtension = 2)
+corona_bat_CoVZC45</code></pre>
+<pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: ATTAAAGGTTTATACCTTCCCAGGTAACAAACCA...CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+## subject: ATATTAGGTTTTTACCTTCCCAGGTAACAAACCA...TCGACAAGAAAAAAAAAAAAAAAAAAAAAAAAAA
+## score: 22343</code></pre>
+<p>Perform a multiple sequence alignment Multiple sequence alignment is a tool used to study closely related genes or proteins in order to find their evolutionary relationships and to identify shared patterns among functionally or structurally related genes.</p>
+<pre class="r"><code>DNA &lt;- readDNAStringSet(&quot;D:/work/projects/R/genomic analysis/datasets_fasta/cov2.fasta&quot;, format=&quot;fasta&quot;,
+               use.names=TRUE)</code></pre>
+<p>Perform a multiple sequence alignment using package msa</p>
+<pre class="r"><code>library(msa)
+msa &lt;- msaClustalW(DNA,cluster=&quot;upgma&quot;, gapOpening=1, 
+                gapExtension= 1, maxiters= 16, 
+                substitutionMatrix=&quot;clustalw&quot;,type=&quot;dna&quot;, 
+                order=c(&quot;aligned&quot;, &quot;input&quot;), verbose=FALSE,
+                help=FALSE)</code></pre>
+<pre><code>## use DNA substitution matrix: clustalw</code></pre>
+<p>Turn your alignment into a tree Convert the alignment for the seqinr package</p>
+<pre class="r"><code>myseq &lt;- msaConvert(msa, type=&quot;seqinr::alignment&quot;)</code></pre>
+<p>Generate a distance matrix using seqinr package</p>
+<pre class="r"><code>d &lt;- dist.alignment(myseq, &quot;identity&quot;)</code></pre>
+<p>generate the tree with the ape package the nj() function allows neighbor-joining tree estimation</p>
+<pre class="r"><code>library(ape)
+myTree &lt;- nj(d)</code></pre>
+<p>Plot the tree</p>
+<pre class="r"><code>plot(myTree, main=&quot;Phylogenetic Tree&quot;)</code></pre>
+<p><img src="Notebook_Final_files/figure-html/unnamed-chunk-25-1.png" width="1152" /> The findings here support the claims made in the recently published paper titled A new coronavirus associated with human respiratory disease in China where the authors state that the genome they have assembled is very closely related to the bat SARS-like coronavirus isolate SARSr-Ra-BatCoV RaTG13. The novel strain has indeed involved and changed since SARS-CoV was discovered in the year 2003.</p>
+<p>Phylogenetic analysis showed that the SARS-CoV-2 is most closely related to that of SARSr-Ra-BatCoV RaTG13 followed by Pangolin-Cov and then Bat-SL-CoVZC45.</p>
+<p>Pangolin-CoV is the second closest relative of SARS-CoV-2 behind RaTG13 as stated in Probable Pangolin Origin of SARS-CoV-2 Associated with the COVID-19 Outbreak</p>
+<p>This finding suggests a distinct evolutionary origin for SARS-CoV-2, possibly as a result of recombination. SARS-CoV-2 might be a recombinant virus, with its genome backbone evolved from Yunnan bat virus–like SARSr-CoVs</p>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

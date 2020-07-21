@@ -1,6 +1,12 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
 ---
 Comparison of whole genome sequences provides a highly detailed view of how organisms are related to each other at the genetic level.
 I have considered a few criteria to compare the composition of the selected coronaviruses. 
@@ -75,7 +81,7 @@ oligo_counter <- function(gs_vector,oligo_collection,oligo_len){
 }
 ```
 Read and vectorize sequences one by one
-```{r}
+```{r warning=FALSE}
 library(seqinr)
 covid <- read.fasta("datasets_fasta/cov2.fasta",forceDNAtolower = FALSE)
 SARS <-  read.fasta("datasets_fasta/sars.fasta",forceDNAtolower = FALSE)
@@ -243,8 +249,9 @@ According to the GC content values listed above, we can say that COVID-19 and ba
 Plot for GC content
 ```{r}
 GC_content <- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)
-GC_df <- data.frame("Names"=character(9),"GC"=GC_content)
-GC_df<- edit(GC_df)
+Names <- c("cov","sars","Mers","Bat","Bat_ratg","hiv","malaria","pangolin","batCoVZC45")
+GC_df <- data.frame("Names"= Names,"GC"=GC_content)
+
 GC_df
 
 ```
@@ -262,7 +269,7 @@ plot_GC
  The sequence alignment is a way of arranging the sequences of DNA/RNA or protein to identify regions of similarity that may be a consequence of functional, structural, or evolutionary relationships between the sequences. 
 
 Let's align other genomes which have proved to be similar with the Covid-19 genome. 
-```{r}
+```{r message= FALSE}
 covid_str <- paste(covid_seq , collapse="")
 sars_str <- paste(sars_seq , collapse="")
 ratg_str <- paste(bat_ratg13_seq , collapse="")
@@ -331,7 +338,7 @@ d <- dist.alignment(myseq, "identity")
 ```
 generate the tree with the ape package
  the nj() function allows neighbor-joining tree estimation
-```{r}
+```{r message=FALSE}
 library(ape)
 myTree <- nj(d)
 ```

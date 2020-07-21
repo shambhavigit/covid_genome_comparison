@@ -1,4 +1,0 @@
-"0","GC_content <- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)"
-"0","GC_df <- data.frame(""Names""=character(9),""GC""=GC_content)"
-"0","GC_df<- edit(GC_df)"
-"0","GC_df"

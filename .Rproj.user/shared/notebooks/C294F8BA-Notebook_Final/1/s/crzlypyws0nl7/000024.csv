@@ -1,0 +1,5 @@
+"0","GC_content <- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)"
+"0","Names <- c(""cov"",""sars"",""Mers"",""Bat"",""Bat_ratg"",""hiv"",""malaria"",""pangolin"",""batCoVZC45"")"
+"0","GC_df <- data.frame(""Names""= Names,""GC""=GC_content)"
+"0",""
+"0","GC_df"

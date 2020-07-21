@@ -14,7 +14,7 @@ tetramers <- c('AAAA','AAAC','AAAG','AAAT','AACA','AACC','AACG','AACT','AAGA','A
 
 
 # Read the file. File is read as multiple lines
-gs <- scan("D:/work/projects/R/genomic analysis/LC5282832/LC528232.txt", what="character", sep=NULL)
+gs <- scan("datasets/Covid_19.txt", what="character", sep=NULL)
 
 
 # Merge multiple lines into 1 single line
@@ -59,7 +59,6 @@ oligo_counter <- function(gs_vector,oligo_collection,oligo_len){
 	
 }
 
-ebola_tetra <- oligo_counter(ebola_seq ,tetramers,4)
 
 # Read and vectorize sequences one by one
 covid <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/cov2.fasta",forceDNAtolower = FALSE)
@@ -67,11 +66,7 @@ SARS <-  read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/sars.fas
 Mers <-  read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/mers.fasta",forceDNAtolower = FALSE)
 Bat_sars <-  read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/BAT_SARS.fasta",forceDNAtolower = FALSE)
 Bat_RaTG13 <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/bat_RaTG13.txt",forceDNAtolower = FALSE)
-camel <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/camelus.fasta",forceDNAtolower = FALSE)
-civet <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/Civet-SARS.fasta",forceDNAtolower = FALSE)
-ebola <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/EBOLAV.fasta",forceDNAtolower = FALSE)
-hedgehog <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/hedgehog.fasta",forceDNAtolower = FALSE)
-hiv <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/hiv2.fasta",forceDNAtolower = FALSE)
+camel <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/camelus.fasta",forceDNAtolower = FALSE)hiv <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/hiv2.fasta",forceDNAtolower = FALSE)
 malaria <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/malariae.fasta",forceDNAtolower = FALSE)
 Pangolin <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/pangolin.txt",forceDNAtolower = FALSE)
 Bat_SL_CoVZC45 <- read.fasta("D:/work/projects/R/genomic analysis/datasets_fasta/bat-SL-CoVZC45.txt",forceDNAtolower = FALSE)
@@ -86,10 +81,6 @@ sars_seq <- unlist(SARS[[1]][1:length(SARS[[1]])])
 mers_seq <- unlist(Mers[[1]][1:length(Mers[[1]])])
 bat_seq <- unlist(Bat_sars[[1]][1:length(Bat_sars[[1]])])
 bat_ratg13_seq<- unlist(Bat_RaTG13[[1]][1:length(Bat_RaTG13[[1]])])
-camel_seq <- unlist(camel[[1]][1:length(camel[[1]])])
-civet_seq <- unlist(civet[[1]][1:length(civet[[1]])])
-ebola_seq <- unlist(ebola[[1]][1:length(ebola[[1]])])
-hedgehog_seq <- unlist(hedgehog[[1]][1:length(hedgehog[[1]])])
 hiv_seq <- unlist(hiv[[1]][1:length(hiv[[1]])])
 malaria_seq <- unlist(malaria[[1]][1:length(malaria[[1]])])
 Pangolin_seq <- unlist(Pangolin[[1]][1:length(Pangolin[[1]])])
@@ -103,7 +94,6 @@ bat_tri <- oligo_counter(bat_seq ,trimers,3)
 bat_rat_tri <- oligo_counter(bat_ratg13,trimers,3)
 camel_tri <- oligo_counter(camel_seq ,trimers,3)
 civet_tri <- oligo_counter(civet_seq ,trimers,3)
-ebola_tri <- oligo_counter(ebola_seq ,trimers,3)
 hedgehog_tri <- oligo_counter(hedgehog_seq ,trimers,3)
 hiv_tri <- oligo_counter(hiv_seq ,trimers,3)
 malaria_tri <- oligo_counter(malaria_seq ,trimers,3)
@@ -118,7 +108,6 @@ sars_tetra <- oligo_counter(sars_seq ,tetramers,4)
 mers_tetra <- oligo_counter(mers_seq ,tetramers,4)
 bat_tetra <- oligo_counter(bat_seq ,tetramers,4)
 bat_rat_tetra <- oligo_counter(bat_ratg13,tetramers,4)
-ebola_tetra <- oligo_counter(ebola_seq ,tetramers,4)
 hiv_tetra <- oligo_counter(hiv_seq ,tetramers,4)
 malaria_tetra <- oligo_counter(malaria_seq ,tetramers,4)
 pangolin_tetra <- oligo_counter(Bat_SL_CoVZC45_seq,tetramers,4)
@@ -141,7 +130,6 @@ tetramer_plot[is.na(tetramer_plot)] <- 0
 
 ## only 5 viruses
 tetramer_merge_5<- cbind(covid_tetra,sars_tetra$Freq,bat_rat_tetra$Freq,pangolin_tetra$Freq,Bat_CovZC45_tetra$Freq)
-
 
 
 names(tetramer_merge)[1]<- "tetramers"
@@ -252,7 +240,6 @@ sars_GC <- GC(sars_seq)
 mers_GC <- GC(mers_seq)
 bat_GC <- GC(bat_seq)
 bat_ratg13 <- GC(bat_ratg13)
-ebola_GC <- GC(ebola_seq)
 hiv_GC <- GC(hiv_seq)
 malaria_GC <- GC(malaria_seq)
 pangolin_GC <- GC(Pangolin_seq)
@@ -260,8 +247,8 @@ Bat_CovZC45_GC <- GC(Bat_SL_CoVZC45_seq )
 
 
 #plot for GC content
-GC_content <- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13,ebola_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)
-GC_df <- data.frame("Names"= character(10),"GC"=GC_content)
+GC_content <- c(covid_GC,sars_GC,mers_GC,bat_GC,bat_ratg13_GC,hiv_GC,malaria_GC,pangolin_GC,Bat_CovZC45_GC)
+GC_df <- data.frame("Names"= character(9),"GC"=GC_content)
 
 GC_df<- edit(GC_df)
 GC_df

@@ -1,0 +1,8 @@
+"0","trimer_merge_5 <- data.frame(trimers=trimers,cov=trimers_merge$cov,sars=trimers_merge$sars,bat_ratg=trimers_merge$bat_rat,pangolin=trimers_merge$pangolin,Bat_CovZC45=trimers_merge$Bat_CovZC45)"
+"0",""
+"0","library(reshape2)"
+"0","plot<- melt(trimers_merge,id.var = ""trimers"")"
+"0","plot5 <- melt(trimer_merge_5 ,id.var = ""trimers"")"
+"0","plot_tetra <- melt(tetramer_merge,id.var = ""tetramers"")"
+"0","plot_tetra_5 <- melt(tetramer_merge_5,id.var = ""tetramers"")"
+"0",""
