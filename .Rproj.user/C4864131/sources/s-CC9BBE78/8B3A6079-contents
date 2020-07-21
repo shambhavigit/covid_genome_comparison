@@ -1,6 +1,6 @@
-name: "Matt Learns R"
+name: "Shambhavi Thakur"
 navbar:
-  title: "Experiments"
+  title: "R Experiments"
   left:
     - text: "Home"
       href: index.html
