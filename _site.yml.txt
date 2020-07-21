@@ -1,0 +1,12 @@
+name: "covid_genome"
+output_dir: "docs"
+navbar:
+  title: "covid_genome"
+  left:
+  - text: "Home"
+   href: index.html
+  - text: "Genomic analysis"
+   href: Notebook_Final.nb
+output:
+  html_document:
+ theme: cosmo
