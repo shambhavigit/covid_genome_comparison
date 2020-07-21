@@ -1,0 +1,4 @@
+"0","plot_GC <- melt(GC_df,id.var = ""Names"")"
+"0","plot_GC <- ggplot(GC_df, aes(x = Names, y = GC)) + "
+"0","  geom_bar(stat = ""identity"")+ theme(axis.text.x = element_text(angle = 90))"
+"0","plot_GC"

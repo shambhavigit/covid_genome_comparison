@@ -1,0 +1,3 @@
+"0","tetra_line_plot <- ggplot(plot_tetra, aes(x = tetramers, y = value,group = variable, color = variable)) + "
+"0","  geom_line()+ theme(axis.text.x = element_text(angle = 90))"
+"0","tetra_line_plot"

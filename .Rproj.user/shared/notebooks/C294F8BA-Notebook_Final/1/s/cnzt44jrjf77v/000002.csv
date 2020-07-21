@@ -1,0 +1,8 @@
+"0","trimers <- c(""AAA"", ""AAC"", ""AAG"", ""AAT"", ""ACA"", ""ACC"", ""ACG"", ""ACT"", ""AGA"", ""AGC"", ""AGG"", ""ATA"", ""ATC"", ""ATG"", ""CAA"", ""CAC"", ""CAG"", ""CCA"",""CCC"",""CCG"",""CGA"",""CGC"",""CTA"",""CTC"",""GAA"",""GAC"",""GCA"",""GCC"",""GGA"",""GTA"",""TAA"",""TCA"")"
+"0",""
+"0","tetramers <- c('AAAA','AAAC','AAAG','AAAT','AACA','AACC','AACG','AACT','AAGA','AAGC','AAGG','AAGT','AATA','AATC', 'AATG','AATT','ACAA','ACAC','ACAG','ACAT','ACCA','ACCC','ACCG','ACCT','ACGA','ACGC','ACGG','ACGT',"
+"0","'ACTA','ACTC','ACTG','AGAA','AGAC','AGAG','AGAT','AGCA','AGCC','AGCG','AGCT','AGGA','AGGC','AGGG',"
+"0","'AGTA','AGTC','AGTG','ATAA','ATAC','ATAG','ATAT','ATCA','ATCC','ATCG','ATGA','ATGC','ATGG','ATTA',"
+"0","'ATTC','ATTG','CAAA','CAAC','CAAG','CACA','CACC','CACG','CAGA','CAGC','CAGG','CATA','CATC','CATG',"
+"0","'CCAA','CCAC','CCAG','CCCA','CCCC','CCCG','CCGA','CCGC','CCGG','CCTA','CCTC','CGAA','CGAC','CGAG','CGCA','CGCC','CGCG','CGGA','CGGC','CGTA','CGTC','CTAA','CTAC','CTAG','CTCA','CTCC','CTGA','CTGC','CTTA','CTTC','GAAA','GAAC','GACA','GACC','GAGA','GAGC','GATA','GATC','GCAA','GCAC','GCCA','GCCC','GCGA','GCGC','GCTA','GGAA','GGAC','GGCA','GGCC','GGGA','GGTA','GTAA','GTAC','GTCA','GTGA','GTTA','TAAA','TACA','TAGA','TATA','TCAA','TCCA','TCGA','TGAA','TGCA','TTAA')"
+"0",""

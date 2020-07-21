@@ -1,0 +1,2 @@
+"0","tetramer_merge<- cbind(covid_tetra,sars_tetra$Freq,mers_tetra$Freq,bat_tetra$Freq,bat_rat_tetra$Freq,hiv_tetra$Freq,malaria_tetra$Freq,pangolin_tetra$Freq,Bat_CovZC45_tetra$Freq)"
+"0",""

@@ -1,0 +1,1 @@
+"0","tetramer_merge_5<- data.frame(tetramers=tetramers,cov=tetramer_merge$cov,sars=tetramer_merge$sars,bat_ratg=tetramer_merge$bat_ratg,pangolin=tetramer_merge$pangolin,Bat_CovZC45=tetramer_merge$Bat_CovZC45)"

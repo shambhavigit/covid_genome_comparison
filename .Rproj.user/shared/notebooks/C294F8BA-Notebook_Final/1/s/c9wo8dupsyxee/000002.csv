@@ -1,0 +1,1 @@
+"0","myseq <- msaConvert(msa, type=""seqinr::alignment"")"

@@ -1,0 +1,4 @@
+"0",""
+"0","trimer_line_plot5 <- ggplot(plot5, aes(x = trimers, y = value,group = variable, color = variable)) + "
+"0","  geom_line()+ theme(axis.text.x = element_text(angle = 90))"
+"0","trimer_line_plot5"
