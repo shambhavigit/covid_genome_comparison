@@ -3,9 +3,9 @@
     "path": "D:/work/projects/git/covid_genome_comparison/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "3779443316",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1595310677798.0,
     "source_on_save": false,
     "relative_order": 5,
@@ -15,11 +15,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1595343607,
+    "lastKnownWriteTime": 1595346116,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1595343882358,
+    "last_content_update": 1595346116152,
     "read_only": false,
     "read_only_alternatives": []
 }
