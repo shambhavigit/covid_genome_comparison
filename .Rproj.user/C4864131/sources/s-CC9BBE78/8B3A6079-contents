@@ -1,6 +1,6 @@
 name: "Shambhavi Thakur"
 navbar:
-  title: "R Experiments"
+  title: "Genomic analysis"
   left:
     - text: "Home"
       href: index.html
